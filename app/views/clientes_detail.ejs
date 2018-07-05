@@ -1,0 +1,183 @@
+<% include components/header %>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <% include components/menu_lateral %>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container2">
+            <!-- HEADER DESKTOP-->
+            <% include components/header_desktop %>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- BREADCRUMB-->
+            <section class="au-breadcrumb m-t-75">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="au-breadcrumb-content">
+                                    <div class="au-breadcrumb-left">
+                                        <span class="au-breadcrumb-span">Você está aqui:</span>
+                                        <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                            <li class="list-inline-item active">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li class="list-inline-item seprate">
+                                                <span>/</span>
+                                            </li>
+                                            <li class="list-inline-item">Clientes</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+
+            <section style="text-align: center;">
+                <form id="formAtualizar">
+                <div class="section__content section__content--p30">
+                <br>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="nome">Nome</label>
+                          <input type="text" class="form-control" id="nome" placeholder="Nome" value="<%= cliente.nome %>">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="telefone">Telefone</label>
+                          <input type="telefone" class="form-control" id="telefone" placeholder="telefone" value="<%= cliente.telefone %>">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" placeholder="email" value="<%= cliente.email %>">
+                      </div>
+                      <div class="form-group">
+                        <label for="cpf_ou_cnpj">CPF ou CNPJ</label>
+                        <input type="text" class="form-control" id="cpf_ou_cnpj" placeholder="cpf ou cnpj" value="<%= cliente.cpf_ou_cnpj %>">
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <label for="ramo">Ramo</label>
+                          <input type="text" class="form-control" id="ramo" value="<%= cliente.ramo %>">
+                        </div>
+                        <div class="form-group col-md-6" style="text-align: center;">
+                          <label><b>Tipo de pessoa</b></label><br>
+
+                          Física <input type="radio" id="f" class="form-control" value="0" name="ra2">
+                          Jurídica <input type="radio" id="j" class="form-control" value="1" name="ra2">
+
+                            <% if(cliente.tipo_pessoa == 0) { %>
+                                <script>document.getElementById("f").checked = true;</script>
+                            <% } else { %>
+                                <script>document.getElementById("j").checked = true;</script>
+                            <% } %>
+                        </div>
+
+                        <div class="form-group col-md-6" style="text-align: center;">
+                          <label><b>Pagamento está em dia?</b></label><br>
+                          Sim <input type="radio" class="form-control" value="1" name="ra" id="true">
+                          Não <input type="radio" class="form-control" value="0" name="ra" id="false">
+                        </div>
+
+                            <% if(cliente.esta_em_dia) { %>
+                                <script>document.getElementById("true").checked = true;</script>
+                            <% } else { %>
+                                <script>document.getElementById("false").checked = true;</script>
+                            <% } %>
+                      </div>
+                </div>
+                    <button type="submit" id="atualizar" name="<%= cliente._id %>" class="btn btn-primary">Atualizar dados</button>
+                    <button type="submit" id="deletar" name="<%= cliente._id %>" class="btn btn-primary" style="background-color: red;">Deletar cliente</button>
+            </form>
+            </section>
+
+            <% include components/footer %>
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+    <script src="vendor/vector-map/jquery.vmap.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.min.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.world.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+    <script>
+
+        $("#atualizar").click(function(event){
+
+            var cliente = {
+                "nome": $("#nome").val(),
+                "email": $("#email").val(),
+                "telefone": $("#telefone").val(),
+                "ramo": $("#ramo").val(),
+                "cpf_ou_cnpj": $("#cpf_ou_cnpj").val(),
+                "tipo_pessoa": $('input[name=ra2]:checked', '#formAtualizar').val(),
+                "esta_em_dia": $('input[name=ra]:checked', '#formAtualizar').val()
+            }
+
+            $.ajax({
+                type: 'PUT',
+                url: "clientes?id="+ this.name,
+                async: false,
+                data: cliente,
+                success: function(data) {
+                    window.location.href = "/clientes";
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        $("#deletar").click(function(event){
+            var answer = confirm("Deseja deletar este cliente?");
+            if(answer){
+                $.ajax({
+                    type: 'DELETE',
+                    url: "clientes?id="+ this.name,
+                    async: false,
+                    success: function(data) {
+                        alert("cliente deletado com sucesso")
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            }  
+        });
+
+    </script>
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,269 @@
+<% include components/header %>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        <% include components/menu_lateral %>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container2">
+            <!-- HEADER DESKTOP-->
+            <% include components/header_desktop %>
+            <!-- END HEADER DESKTOP-->
+
+            <!-- BREADCRUMB-->
+            <section class="au-breadcrumb m-t-75">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="au-breadcrumb-content">
+                                    <div class="au-breadcrumb-left">
+                                        <span class="au-breadcrumb-span">Você está aqui:</span>
+                                        <ul class="list-unstyled list-inline au-breadcrumb__list">
+                                            <li class="list-inline-item active">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li class="list-inline-item seprate">
+                                                <span>/</span>
+                                            </li>
+                                            <li class="list-inline-item">Clientes</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END BREADCRUMB-->
+
+            <section>
+                <h3 style="margin: 4%;">Clientes cadastrados</h3>
+
+                <div class="table-data__tool" style="margin-left: 4%; margin-right: 4%;">
+                    <div class="table-data__tool-left">
+                        <div class="rs-select2--light rs-select2--md">
+                            <select class="js-select2" name="property" id="pagamento">
+                                <option selected="selected">Pagamento</option>
+                                <option value="">Em dia</option>
+                                <option value="">Devendo</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                        <div class="rs-select2--light rs-select2--sm">
+                            <select class="js-select2" name="time" id="pessoa">
+                                <option selected="selected">Pessoa</option>
+                                <option value="">Física</option>
+                                <option value="">Jurídica</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                        <!-- <button class="au-btn-filter">
+                            <i class="zmdi zmdi-filter-list"></i>Filtros</button> -->
+                    </div>
+                    <div class="table-data__tool-right">
+                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" onclick="GoToCadastro();">
+                            <i class="zmdi zmdi-plus"></i>Novo cliente</button>
+                    </div>
+                </div>
+
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2" id="tabela">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Telefone</th>
+                                            <th>Está em dia?</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                        <% for(var i=0; i<clientes.length; i++) { %>
+                                            <tr class="tr-shadow">
+                                                <td><%= clientes[i].nome %></td>
+                                                <td><%= clientes[i].email %></td>
+                                                <td><%= clientes[i].telefone %></td>
+                                                <td style="text-align: center;">
+                                                    <% if(clientes[i].esta_em_dia) { %>
+                                                        <img src="images/icon/ok.png">
+                                                    <% } else { %>
+                                                        <img src="images/icon/not.png">
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" id="<%= clientes[i]._id %>" name="botaoEditar">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Deletar" id="<%= clientes[i]._id %>" name="botaoDeletar">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        <% } %>
+                                        
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <% include components/footer %>
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+    <script src="vendor/vector-map/jquery.vmap.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.min.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="vendor/vector-map/jquery.vmap.world.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+    <script>
+        function GoToCadastro(){
+            window.location.href = "/cadastro-cliente";
+        }
+
+        $(document).on("change", "#pessoa, #pagamento", function(){
+            var pessoa = "";
+            var pagamento = "";
+
+            console.log($("#pagamento option:selected").text());
+            console.log($("#pessoa option:selected").text());
+
+            if($("#pagamento option:selected").text() != "Pagamento") {
+                pagamento = $("#pagamento option:selected").text();
+            }
+            if($("#pessoa option:selected").text() != "Pessoa") {
+                pessoa = $("#pessoa option:selected").text();
+            }
+
+            //deletar a tabela anterior para aparecer apenas os elementos filtrados
+            while (document.getElementById("tbody").firstChild) {
+                document.getElementById("tbody").removeChild(document.getElementById("tbody").firstChild);
+            }
+
+            $.ajax({
+                method:"GET",
+                url: "http://localhost:3000/clientes?pagamento="+pagamento+"&pessoa="+pessoa,
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    if(data.clientes.length > 0){
+                        var Tabela = document.getElementById("tabela");
+                        var TBody = document.getElementById("tbody");
+
+                        for(var i=0; i<data.clientes.length; i++){
+                            var tr = document.createElement("tr");
+                            var td = document.createElement("td");
+                            td.innerHTML = data.clientes[i].nome;
+                            var td1 = document.createElement("td");
+                            td1.innerHTML = data.clientes[i].email;
+                            var td2 = document.createElement("td");
+                            td2.innerHTML = data.clientes[i].telefone;
+                            var td3 = document.createElement("td");
+                            var img = document.createElement("img");
+                            if(data.clientes[i].esta_em_dia) img.src = "images/icon/ok.png";
+                            else img.src = "images/icon/not.png";
+                            var td4 = document.createElement("td");
+                            td4.classList.add("table-data-feature");
+                            var div = document.createElement("div");
+                            div.classList.add("table-data-feature");
+                            var button = document.createElement("button");
+                            button.classList.add("item");
+                            button.title = "Editar";
+                            button.name = "botaoEditar";
+                            button.id = data.clientes[i]._id;
+                            
+
+                            var button1 = document.createElement("button1");
+                            button1.classList.add("item");
+                            button1.title = "Deletar";
+                            button1.name = "botaoDeletar";
+                            button1.id = data.clientes[i]._id;
+
+
+                            Tabela.appendChild(TBody);
+                            TBody.appendChild(tr);
+                            tr.appendChild(td);
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            tr.appendChild(td3);
+                            tr.appendChild(td4);
+                            td3.appendChild(img);
+                            td4.appendChild(div);
+                            div.appendChild(button);
+                            div.appendChild(button1);
+                        }
+                    }
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            });
+        });
+
+        $("button[name='botaoEditar']").click(function(event){
+            //alert("/clientes/" + this.name)
+            window.location.href = "/clientes?id=" + this.id;
+        });
+
+        $("button[name='botaoDeletar']").click(function(event){
+            var answer = confirm("Deseja deletar este cliente?");
+            if(answer){
+                $.ajax({
+                    type: 'DELETE',
+                    url: "clientes?id="+ this.id,
+                    async: false,
+                    success: function(data) {
+                        alert("cliente deletado com sucesso")
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            }
+            
+        });
+
+    </script>
+</body>
+
+</html>
+<!-- end document-->

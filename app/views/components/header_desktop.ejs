@@ -1,0 +1,92 @@
+ HEADER DESKTOP-->
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="header-wrap">
+                <form class="form-header" action="" method="POST">
+                    <input class="au-input au-input--xl" type="text" name="search" placeholder="Procure por alguma coisa..." />
+                    <button class="au-btn--submit" type="submit">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                </form>
+                <div class="header-button">
+                    <div class="noti-wrap">
+                        <script type="text/javascript">
+                            function goToCadastroMembro(){
+                                window.location.href = "/cadastro-membro";
+                            }
+                        </script>
+                        <% if(loggedUser && data.diretor) { %>
+                            <div class="noti__item js-item-menu">
+                                <button class="au-btn au-btn-icon au-btn--green" onclick="goToCadastroMembro();">
+                                Registrar membro</button>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="account-wrap">
+                        <div class="account-item clearfix js-item-menu">
+                            <div class="image">
+                                <% if(loggedUser) { %>
+                                    <img src="<%= data.img %>" alt="John Doe" />
+                                <% } else { %>
+                                    <img src="uploads/profile_pics/default.png" alt="John Doe" />
+                                <% } %>
+                            </div>
+                            <div class="content">
+                                <% if(loggedUser) { %>
+                                    <a class="js-acc-btn" href="/perfil"><%= data.nome %></a>
+                                <% } else { %>
+                                    <a class="js-acc-btn" href="#">Visitante</a>
+                                <% } %>
+                            </div>
+                            <div class="account-dropdown js-dropdown">
+                                <div class="info clearfix">
+                                    <div class="image">
+                                        <a href="#">
+                                            <img src="uploads/profile_pics/default.png" alt="John Doe" />
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <% if(loggedUser) { %>
+                                            <h5 class="name">
+                                                <a href="#"><%= data.nome %></a>
+                                            </h5>
+                                            <span class="email"><%= data.email %></span>
+                                        <% } else { %>
+                                            <h5 class="name">
+                                                <a href="#">Visitante</a>
+                                            </h5>
+                                            <span class="email">Sem e-mail</span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <% if(loggedUser) { %>
+                                    <div class="account-dropdown__body">
+                                        <div class="account-dropdown__item">
+                                            <a href="/perfil">
+                                                <i class="zmdi zmdi-account"></i>Minha conta</a>
+                                        </div>
+                                        <div class="account-dropdown__item">
+                                            <a href="#">
+                                                <i class="zmdi zmdi-settings"></i>Configurações</a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <div class="account-dropdown__footer">
+                                    <% if(loggedUser) {%>
+                                        <a href="/sair">
+                                            <i class="zmdi zmdi-power"></i>Sair</a>
+                                    <% } else { %> 
+                                        <a href="/login">
+                                            <i class="zmdi zmdi-power"></i>Entrar</a>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- HEADER DESKTOP

@@ -1,0 +1,50 @@
+<!--<script>
+    if(sessionStorage.pagina == "perfil"){
+        alert("entrei")
+        document.getElementById("perfil").addClass("active");
+    }
+</script>-->
+
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a href="/">
+            <img src="images/icon/logo.png" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li class="has-sub" id="inicio">
+                    <a class="js-arrow" href="/">
+                        <i class="fas fa-tachometer-alt"></i>Início</a>
+                </li>
+                <li id="perfil">
+                    <a href="/perfil">
+                        <i class="fas fa-chart-bar"></i>Perfil</a>
+                </li>
+                <li id="projetos">
+                    <a href="/projetos">
+                        <i class="fas fa-table"></i>Projetos</a>
+                </li>
+                <li class="has-sub" id="clientes">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-copy"></i>Clientes</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="/clientes">Todos os clientes</a>
+                        </li>
+                        <li>
+                            <a href="/cadastro-cliente">Cadastrar um cliente</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="dados">
+                    <a href="/cadastro-membro">
+                        <i class="fas fa-chart-bar"></i>Cadastre-se</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->

@@ -1,0 +1,152 @@
+<% include components/header %>
+<body class="animsition">
+    <div class="page-wrapper">
+        <% include components/menu_lateral %>
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <% include components/header_desktop %> 
+            <!-- MAIN CONTENT   ***** ADD MY THINGS IN HERE ********-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h1 class="title-1">Cadastramento de projetos</h1>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row m-t-25">
+                                <div class="col-md-12">
+                                    <form id="form">
+                                        <div class="form-group">
+                                            <label for="nome">Nome</label>
+                                            <input type="text" class="form-control" id="nome" placeholder="Nome do projeto">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="preco">Preço</label><br/>
+                                            <input type="text" class="form-control" id="preco" placeholder="Preço do projeto">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descricao">Descrição</label>
+                                            <textarea class="form-control" id="descricao"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="empecilhos">Empecilhos</label>
+                                            <textarea class="form-control" id="empecilhos"></textarea>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <label for="data_inicio">Data de início</label>
+                                                <input type="date" class="form-control" id="data_inicio">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="data_fim">Data de fim</label>
+                                                <input type="date" class="form-control" id="data_fim">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select_clientes">Cliente associado</label><br/>
+                                            <select id="select_clientes" class="form-control">
+                                                <% for(var i=0; i<clientes.length; i++) { %>
+                                                    <option class="form-control" value="<%= clientes[i]._id %>"><%= clientes[i].nome %></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="select_dev">Dev team</label><br/>
+                                            <select id="select_dev" class="form-control">
+                                                <% for(var i=0; i<membros.length; i++) { %>
+                                                    <option class="form-control" value="<%= membros[i].email %>"><%= membros[i].nome %></option>
+                                                <% } %>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ra">Projeto está ativo?</label><br/>
+                                            Sim <input type="radio" name="ra" value="1">
+                                            Não <input type="radio" name="ra" value="0">
+                                        </div>
+                                        <div class="form-group" style="text-align: center;">
+                                            <button type="submit" class="btn btn-primary col-md-2">Enviar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <% include components/footer.ejs %>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        
+    <script>
+        $(document).ready(function() {
+            $('#form').submit(function(event) {
+                event.preventDefault();
+
+                var projeto = 
+                {
+                    "nome": $('#nome').val(),
+                    "preco": $('#preco').val(),
+                    "descricao": $('#descricao').val(),
+                    "ativo": $('input[name=ra]:checked', '#form').val(),
+                    "empecilhos": $('#empecilhos').val(),
+                    "data_inicio": $('#data_inicio').val(),
+                    "data_fim": $('#data_fim').val(),
+                    "id_cliente": $("#select_clientes option:selected").val(),
+                    "dev_team": $("#select_dev option:selected").val()
+                }
+
+                $.ajax({
+                    method:"POST",
+                    url: "http://localhost:3000/cadastro-projeto",
+                    data: JSON.stringify(projeto), //Função para transformar o objeto em JSON
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                        window.location.href = "/projetos";
+                    },
+                    error: function(data) {
+                        //var erro = data.responseJSON.erros[0].msg;
+                        alert("erro");
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->
